@@ -1,0 +1,39 @@
+---
+import MainHead from '@components/MainHead.astro';
+import Footer from '@components/Footer.astro';
+import Nav from '@components/Nav.astro';
+import Card from '@components/Card.astro';
+// import type Blog from '../types/Blog';
+import type Blog from '../types/Blog';
+
+const blogs = (await Astro.glob<Blog>('./blog/**/*.mdx'))
+	.filter(({ frontmatter }) => !!frontmatter.publishDate && !frontmatter.draft)
+	.sort(
+		(a, b) =>
+			new Date(b.frontmatter.publishDate).valueOf() - new Date(a.frontmatter.publishDate).valueOf()
+	);
+---
+
+<html lang="en">
+	<head>
+		<MainHead
+			title="blog | astro portfolio"
+			description="check out astro portfolio's blog"
+		/>
+	</head>
+	<body>
+		<Nav />
+
+		<main class="container mx-auto" role="main">
+      <div class="pt-8 pb-32 px-4">
+        <h1 class="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text font-extrabold text-transparent text-4xl md:text-6xl lg:text-8xl pb-6 md:pb-10 lg:pb-14">Blog</h1>
+        
+        <div role="list" class="grid gap-12 grid-cols-1 md:grid-cols-2 auto-rows-min">
+          {blogs.map((blog) => <Card content={blog} headerTag="h2" />)}
+        </div>
+      </div>
+		</main>
+
+		<Footer />
+	</body>
+</html>

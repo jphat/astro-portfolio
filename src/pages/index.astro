@@ -1,0 +1,122 @@
+---
+// Component Imports
+import MainHead from "../components/MainHead.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import CardShort from "@components/CardShort.astro";
+import type Project from "../types/Project";
+import type Blog from "../types/Blog";
+
+// Data Fetching: List all Markdown posts in the repo.
+const projects = await Astro.glob<Project>("./projects/**/*.mdx");
+const blogs = await Astro.glob<Blog>("./blog/**/*.mdx");
+
+const nonDraftProjects =  projects.filter((project) => !project.frontmatter.draft);
+const nonDraftBlogs =     blogs.filter((blog) => !blog.frontmatter.draft);
+---
+
+<!-- hello, world -->
+
+<html lang="en">
+  <head>
+    <MainHead
+      title="astro portfolio"
+      description="astro portfolio: developer of websites, take of photographs, worker of woods"
+    />
+  </head>
+  <body>
+    <Nav />
+    
+    <main id="main" class="" role="main">
+      <section class="bg-black text-white" style="--tw-bg-opacity: 0.86;">
+        <div class="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
+          <div class="mx-auto max-w-3xl md:max-w-xl">
+            <h1 class="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text font-extrabold text-transparent pb-8 text-4xl md:text-6xl lg:text-8xl">
+              Hello <span class="waving-hand text-white">👋</span>, <span class="block">I'm Astro.</span>
+            </h1>
+
+            <p class="mx-auto mt-4 max-w-xl sm:text-xl sm:leading-relaxed text-1xl md:text-2xl lg:text-3xl">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+            </p>
+
+            <p class="mx-auto mt-4 max-w-xl sm:text-xl sm:leading-relaxed text-1xl md:text-2xl lg:text-3xl">
+              <a href="#main">Check out what I'm working on</a>.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="block py-16 md:py-32 lg:py-48 bg-black text-white" style="--tw-bg-opacity: 0.90;">
+        <div class="container mx-auto">
+          <div class="px-4">
+            <h2 class="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text font-extrabold text-transparent text-4xl md:text-6xl lg:text-8xl pb-2 md:pb-4 lg:pb-6 overf">Recent Projects</h2>
+            <ol>
+              {
+                nonDraftProjects.slice(0, 3).map((project) => (
+                  <li class="py-2 md:py-3 lg:py-4">
+                    <CardShort content={project} headerTag="h3" />
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="block py-16 md:py-32 lg:py-48 bg-black text-white" style="--tw-bg-opacity: 0.95;">
+        <div class="container mx-auto">
+          <div class="px-4">
+            <h2 class="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text font-extrabold text-transparent text-4xl md:text-6xl lg:text-8xl pb-2 md:pb-4 lg:pb-6">Recent Posts</h2>
+            <ol>
+              {
+                nonDraftBlogs.slice(0, 3).map((blog) => (
+                  <li class="py-2 md:py-3 lg:py-4">
+                    <CardShort content={blog} headerTag="h3" />
+                  </li>
+                ))
+              }
+            </ol>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <Footer />
+    <style>
+      .waving-hand {
+        animation-duration: 2.5s;
+        animation-iteration-count: infinite;
+        animation-name: wave-animation;
+        display: inline-flex;
+        transform-origin: 70% 70%;
+      }
+
+      @keyframes wave-animation {
+        0% {
+          transform: rotate(0deg);
+        }
+        15% {
+          transform: rotate(14deg);
+        } /* The following five values can be played with to make the waving more or less extreme */
+        30% {
+          transform: rotate(-8deg);
+        }
+        40% {
+          transform: rotate(14deg);
+        }
+        50% {
+          transform: rotate(-4deg);
+        }
+        60% {
+          transform: rotate(10deg);
+        }
+        70% {
+          transform: rotate(0deg);
+        } /* Reset for the last half to pause */
+        100% {
+          transform: rotate(0deg);
+        }
+      }
+    </style>
+  </body>
+</html>

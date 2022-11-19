@@ -1,0 +1,26 @@
+{
+  "name": "@example/portfolio",
+  "type": "module",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^0.11.4",
+    "@astrojs/tailwind": "^2.1.0",
+    "@fontsource/montserrat": "^4.5.13",
+    "@google/model-viewer": "^2.1.0",
+    "astro": "^1.5.0",
+    "tailwindcss": "^3.0.24"
+  },
+  "devDependencies": {
+    "@types/date-fns": "^2.6.0",
+    "date-fns": "^2.29.3",
+    "sass": "^1.55.0"
+  }
+}

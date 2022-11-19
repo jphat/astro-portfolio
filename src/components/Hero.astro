@@ -1,0 +1,13 @@
+---
+const shero = Astro.props.hero;
+const {type, src, alt, thumb, attr, caption} = Astro.props.hero;
+---
+
+<figure>
+  { type == 'image' ? <img src={src} alt={alt} /> : '' }
+  <figcaption class="container mx-auto">
+    <div class="flex p-4">
+      { attr ? <small class="media__attr ml-auto">{attr}</small> : ''}
+    </div>
+    </figcaption>
+</figure>

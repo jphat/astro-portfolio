@@ -1,0 +1,11 @@
+---
+const hashtags = Astro.props.tags;
+---
+
+{ hashtags
+  .sort()
+  .map((tag: string) => 
+  <span class="hashtag border text-sm mr-1.5 py-0.5 px-1 border-solid border-slate-900">
+    <a href={`/hashtags/${tag}`}>{tag}</a>
+  </span>
+)}

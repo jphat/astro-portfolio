@@ -1,0 +1,24 @@
+---
+import type { MarkdownInstance } from 'astro';
+import type Project from '../types/Project';
+import type Blog from '../types/Blog';
+
+interface Props {
+	content: MarkdownInstance<Project> | MarkdownInstance<Blog>;
+  headerTag: string;
+}
+
+const { frontmatter, url } = Astro.props.content;
+const HeaderTag = Astro.props.headerTag ? Astro.props.headerTag : 'h2';
+---
+
+<a class="flex no-underline" href={url}>
+  <article class="flex flex-col overflow-hidden w-full">
+    <picture class="block overflow-hidden">
+      <img class="w-full" src={`${ frontmatter.hero.thumb }`} alt={frontmatter.hero.alt} />
+    </picture>
+    <div class="content pt-4">
+      <HeaderTag class="text-1xl md:text-2xl lg:text-3xl">{frontmatter.title}</HeaderTag>
+    </div>
+  </article>
+</a>

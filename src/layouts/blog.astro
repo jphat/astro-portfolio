@@ -1,0 +1,50 @@
+---
+import MainHead from '@components/MainHead.astro';
+import Footer from '@components/Footer.astro';
+import Nav from '@components/Nav.astro';
+import Hero from '@components/Hero.astro';
+import Hashtags from '@components/Hashtags.astro';
+import type Blog from '../types/Blog';
+
+interface Props {
+	content: Blog;
+}
+
+const { content } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<MainHead 
+      title={`${content.title} | astro portfolio`} 
+      description={content.description}
+    />
+	</head>
+
+	<body>
+		<Nav />
+
+    <main role="main">
+      <article>
+        <header class="container mx-auto pb-10 pt-6 md:pb-14 md:pt-10 lg:pb-16 lg:pt-12">
+          <h1 class="text-4xl md:text-6xl lg:text-8xl px-4">{content.title}</h1>
+          <!-- <h1 class="text-4xl md:text-6xl lg:text-8xl" set:html={rawTitle} /> -->
+        </header>
+
+        <Hero hero={content.hero} />
+
+        <div class="container mx-auto">
+          <div class=" pt-10 md:pt-14 lg:pt-18 pb-32 px-4">
+            <slot />
+
+            <footer class="pt-10">
+              <Hashtags tags={content.tags} />
+            </footer>
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <Footer />
+	</body>
+</html>

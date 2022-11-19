@@ -1,0 +1,71 @@
+---
+import MainHead from "@components/MainHead.astro";
+import Footer from "@components/Footer.astro";
+import Nav from "@components/Nav.astro";
+import Card from "@components/Card.astro";
+import { getAllHashtags, sortMDByDate } from "@utils";
+
+import type Blog from "@types/Blog";
+import type Project from "@types/Project";
+
+export async function getStaticPaths({}) {
+
+  const Blogs = await Astro.glob<Blog>("../../blog/*.mdx");
+  const Projs = await Astro.glob<Project>("../../projects/*.mdx");
+
+  // combine content and filter by publishDate & draft
+  const allContent = Blogs.concat(Projs);
+
+  // sort by date
+  const sortedContent = sortMDByDate(allContent);
+
+  // -> get all the tags in the content
+  const allHashtags = getAllHashtags(sortedContent);
+
+  // -> return
+  return allHashtags.map((tag) => {
+    const filteredContent = sortedContent.filter((post) =>
+      !post.frontmatter.draft && post.frontmatter.tags?.includes(tag)
+    );
+  
+    return {
+      params: { tag },
+      props: {
+        pages: filteredContent,
+      },
+    };
+
+  });
+}
+
+const { pages } = Astro.props;
+const { tag } = Astro.params;
+---
+
+<html lang="en">
+  <head>
+    <MainHead
+      title={`#${tag} | astro portfolio`}
+      description={`all content tagged with ${tag}`}
+    />
+  </head>
+  <body>
+    <Nav />
+
+    <main class="container mx-auto">
+      <div class="">
+        <div class="px-4 pt-8 pb-32">
+          <h1 class="bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text font-extrabold text-transparent text-4xl md:text-6xl lg:text-8xl pb-6 md:pb-10 lg:pb-14">
+            #{tag}
+          </h1>
+
+          <div role="list" class="grid gap-12 grid-cols-1 md:grid-cols-2 auto-rows-min">
+            {pages.map((post: any) => <Card content={post} headerTag="h2" />)}
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,51 @@
+---
+import MainHead from '@components/MainHead.astro';
+import Footer from '@components/Footer.astro';
+import Nav from '@components/Nav.astro';
+import Hero from '@components/Hero.astro';
+import type Project from '../types/Project';
+import Hashtags from '@components/Hashtags.astro';
+
+interface Props {
+	content: Project;
+}
+
+const { content } = Astro.props;
+// const rawTitle = content.title;
+---
+
+<html lang="en">
+	<head>
+    <MainHead 
+      title={`${content.title} | astro portfolio`} 
+      description={content.description}
+    />
+	</head>
+	<body>
+		<Nav />
+
+    <main role="main">
+      <article>
+        <Hero hero={content.hero} />
+
+        <div class="container mx-auto">
+          <div class="wrapper grid gap-12 grid-cols-1 md:grid-cols-2 auto-rows-min pt-10 md:pt-14 lg:pt-18 px-4 pb-32">
+            <header>
+              <h1 class="text-4xl md:text-6xl lg:text-8xl md:text-right lg:text-right">{content.title}</h1>
+              <!-- <h1 class="text-4xl md:text-6xl lg:text-8xl" set:html={rawTitle} /> -->
+            </header>
+            
+            <div class="content">
+              <slot />
+              <footer class="pt-10">
+                <Hashtags tags={content.tags} />
+              </footer>
+            </div>
+          </div>
+        </div>
+      </article>
+    </main>
+ 
+    <Footer />
+	</body>
+</html>

@@ -1,0 +1,27 @@
+---
+// import { Code } from "astro/components";
+import Code from 'astro/components/Code.astro';
+
+interface Props {
+  conde: string;
+  lang: string;
+  theme: string;
+}
+
+const { code, language, theme } = Astro.props;
+---
+
+<div class="container mx-auto">
+  <Code code={code} lang={language} theme={theme} />
+</div>
+
+<style lang="scss">
+  .container {
+    @apply mt-6;
+    @apply mb-6;  
+  }
+
+  .line + .line {
+    @apply pb-6;
+  }
+</style>

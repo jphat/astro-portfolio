@@ -1,0 +1,22 @@
+---
+import type { MarkdownInstance } from 'astro';
+import type Project from '../types/Project';
+import type Blog from '../types/Blog';
+
+interface Props {
+	content: MarkdownInstance<Project> | MarkdownInstance<Blog>;
+  headerTag: string;
+}
+
+const { frontmatter, url } = Astro.props.content;
+const HeaderTag = Astro.props.headerTag ? Astro.props.headerTag : 'h2';
+// const date = new Date(frontmatter.publishDate);
+---
+
+<a class="no-underline" href={url}>
+  <article class="card">
+    <HeaderTag class="text-1xl md:text-2xl lg:text-3xl">{frontmatter.title}</HeaderTag>
+    <!-- <p>{frontmatter.description}</p> -->
+    <!-- {frontmatter.type == 'blog' ? date : ''} -->
+  </article>
+</a>

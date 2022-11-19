@@ -1,0 +1,62 @@
+---
+import MainHead from '@components/MainHead.astro';
+import Footer from '@components/Footer.astro';
+import Nav from '@components/Nav.astro';
+import ModelViewer from '@components/ModelViewer.astro';
+---
+
+<html lang="en">
+	<head>
+		<MainHead 
+      title="about | astro portfolio"
+      description="about astro portfolio"
+    />
+	</head>
+	<body>
+		<Nav />
+
+    <ModelViewer />
+
+    <main class="container mx-auto grid gap-12 grid-cols-1 md:grid-cols-2 auto-rows-min" role="main">
+      <figure>
+        <picture>
+          <!-- <source srcset="https://res.cloudinary.com/dhdm25b0v/image/upload/c_crop,q_80,h_600,w_600/v1665971934/site/eric_josephat_ppyryi.jpg" media="(min-width: 400px)"> -->
+          <!-- <source srcset="https://res.cloudinary.com/dhdm25b0v/image/upload/c_crop,h_4677,w_4677/v1665971934/site/eric_josephat_ppyryi.jpg" media="(min-width: 800px)"> -->
+          <source srcset="https://res.cloudinary.com/dhdm25b0v/image/upload/c_crop,h_4677,w_4677/v1665971934/site/eric_josephat_ppyryi.jp2" type="image/jp2">
+          <img src="https://res.cloudinary.com/dhdm25b0v/image/upload/c_crop,h_4677,w_4677/v1665971934/site/eric_josephat_ppyryi.jpg" alt="">
+        </picture>
+        <figcaption>photo: <a href="https://www.annhamiltonstudio.com/" target="_blank">Ann Hamilton</a></figcaption>
+      </figure>
+
+      <div class="content">        
+        <h1>Hi <span class="waving-hand">👋</span>, I'm astro portfolio</h1>
+        <p>I am web developer with specializing in architecting sustainable websites that prioritize usability and accessibility. I am passionate about using analysis and creativity to engineer simple yet elegant solutions to complex technical problems.</p>
+        <!-- https://codepen.io/einargudnig/pen/YzNeZOG -->
+        <!-- I've been working with the web for 6 years, building responsive websites and web apps. I love writing CSS, HTML and progressive JavaScript, and enjoy working on performance, accessibility, modern static site generation and stunning interfaces. -->
+      </div>
+		</main>
+
+    <Footer />
+	</body>
+</html>
+
+<style>
+  .waving-hand {
+    animation-duration: 2.5s;
+    animation-iteration-count: infinite;
+    animation-name: wave-animation;
+    display: inline-flex;
+    transform-origin: 70% 70%;
+  }
+
+  @keyframes wave-animation {
+    0% { transform: rotate( 0.0deg) }
+    15% { transform: rotate(14.0deg) }  /* The following five values can be played with to make the waving more or less extreme */
+    30% { transform: rotate(-8.0deg) }
+    40% { transform: rotate(14.0deg) }
+    50% { transform: rotate(-4.0deg) }
+    60% { transform: rotate(10.0deg) }
+    70% { transform: rotate( 0.0deg) }  /* Reset for the last half to pause */
+    100% { transform: rotate( 0.0deg) }
+  }
+</style>
