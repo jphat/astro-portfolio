@@ -4,7 +4,7 @@
 npm create astro@latest -- --template portfolio
 ```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/jphat/astro-portforlio)
+[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/jphat/astro-portfolio)
 
 > 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
