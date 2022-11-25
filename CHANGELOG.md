@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 - `ModelViewer` for 3D renderings
 
+## [0.0.1] - 2022-11-25
+- screenshot.png
+- stackblitz
 ## [0.0.1] - 2022-11-19
 ### Added
 - Initial public commit
